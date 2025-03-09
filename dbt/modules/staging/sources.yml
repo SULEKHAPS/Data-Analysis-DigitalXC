@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: itsm
+    description: "Raw ITSM ticket data from ServiceNow"
+    tables:
+      - name: raw_tickets
+        description: "Raw ticket data imported from CSV (Sample Data file for Analysis_Jan'25.csv)"
+        columns:
+          - name: Ticket_ID
+            description: "Unique identifier for the ticket (mapped from inc_number)"
+          - name: Category
+            description: "Primary categorization of the ticket (mapped from inc_category)"
+          - name: Sub_Category
+            description: "Secondary categorization of the ticket (mapped from inc_business_service)"
+          - name: Priority
+            description: "Urgency level of the ticket (mapped from inc_priority, standardized to Critical/High/Medium/Low)"
+          - name: Created_Date
+            description: "When the ticket was created (mapped from inc_sys_created_on)"
+          - name: Resolved_Date
+            description: "When the ticket was resolved (mapped from inc_resolved_at)"
+          - name: Status
+            description: "Current state of the ticket (mapped from inc_state, with 'Closed' mapped to 'Resolved')"
+          - name: Assigned_Group
+            description: "Team responsible for the ticket (mapped from inc_assignment_group)"
+          - name: Technician
+            description: "Individual assigned to the ticket (mapped from inc_assigned_to)"
+          - name: Resolution_Time_Hrs
+            description: "Time to resolution in hours (calculated from Created_Date and Resolved_Date)"
+          - name: Customer_Impact
+            description: "Impact level on customer operations (mapped from inc_caller_id)"

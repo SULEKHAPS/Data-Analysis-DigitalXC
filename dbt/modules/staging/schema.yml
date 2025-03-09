@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_tickets
+    description: "Standardized ticket data with cleaned fields"
+    columns:
+      - name: ticket_id
+        description: "The primary key for tickets"
+        tests:
+          - unique
+          - not_null
+      - name: category
+        description: "The category of the ticket"
+      - name: sub_category
+        description: "The sub-category of the ticket"
+      - name: priority
+        description: "The priority level of the ticket"
+      - name: created_date
+        description: "The date and time when the ticket was created"
+      - name: resolved_date
+        description: "The date and time when the ticket was resolved"
+      - name: status
+        description: "The current status of the ticket"
+      - name: assigned_group
+        description: "The group assigned to the ticket"
+      - name: technician
+        description: "The technician assigned to the ticket"
+      - name: resolution_time_hrs
+        description: "The time taken to resolve the ticket in hours"
+      - name: customer_impact
+        description: "The impact level on the customer"
+      - name: created_year
+        description: "The year when the ticket was created"
+      - name: created_month
+        description: "The month when the ticket was created"
+      - name: created_day
+        description: "The day when the ticket was created"
