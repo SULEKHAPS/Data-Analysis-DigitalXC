@@ -1,0 +1,211 @@
+{
+  "dashboard_title": "ITSM Analytics Dashboard",
+  "description": "ServiceNow ticket analytics dashboard showing key performance metrics",
+  "css": "",
+  "slug": "itsm-analytics",
+  "uuid": "c23c5e96-4910-4db1-a8a9-3c1b04b9f46a",
+  "position": {
+    "CHART-ticket_volume": {
+      "type": "CHART",
+      "id": "CHART-ticket_volume",
+      "children": [],
+      "meta": {
+        "width": 8,
+        "height": 50,
+        "chartId": 1001
+      }
+    },
+    "CHART-resolution_time": {
+      "type": "CHART",
+      "id": "CHART-resolution_time",
+      "children": [],
+      "meta": {
+        "width": 4,
+        "height": 50,
+        "chartId": 1002
+      }
+    },
+    "CHART-closure_rate": {
+      "type": "CHART",
+      "id": "CHART-closure_rate",
+      "children": [],
+      "meta": {
+        "width": 6,
+        "height": 50,
+        "chartId": 1003
+      }
+    },
+    "CHART-ticket_backlog": {
+      "type": "CHART",
+      "id": "CHART-ticket_backlog",
+      "children": [],
+      "meta": {
+        "width": 6,
+        "height": 50,
+        "chartId": 1004
+      }
+    },
+    "FILTER_BOX-1": {
+      "type": "FILTER_BOX",
+      "id": "FILTER_BOX-1",
+      "children": [],
+      "meta": {
+        "width": 12,
+        "height": 20
+      }
+    }
+  },
+  "metadata": {
+    "filter_configuration": [
+      {
+        "id": "filter_week",
+        "name": "Week",
+        "filterType": "filter_time",
+        "targets": [{
+          "datasetId": 1,
+          "column": {"name": "created_date"}
+        }]
+      },
+      {
+        "id": "filter_category",
+        "name": "Category",
+        "filterType": "filter_select",
+        "targets": [{
+          "datasetId": 1,
+          "column": {"name": "category"}
+        }]
+      },
+      {
+        "id": "filter_priority",
+        "name": "Priority",
+        "filterType": "filter_select",
+        "targets": [{
+          "datasetId": 1,
+          "column": {"name": "priority"}
+        }]
+      }
+    ],
+    "timed_refresh_immune_slices": [],
+    "expanded_slices": {},
+    "refresh_frequency": 0,
+    "default_filters": "{}",
+    "color_scheme": "supersetColors"
+  },
+  "slices": [
+    {
+      "slice_id": 1001,
+      "slice_name": "Ticket Volume Trends",
+      "form_data": {
+        "viz_type": "line",
+        "datasource": "1__table",
+        "slice_id": 1001,
+        "url_params": {},
+        "granularity_sqla": "created_date",
+        "time_grain_sqla": "P1D",
+        "time_range": "Last week",
+        "metrics": [{"expressionType": "SQL", "sqlExpression": "COUNT(*)", "column": null, "aggregate": null, "label": "Ticket Count"}],
+        "adhoc_filters": [],
+        "groupby": [],
+        "timeseries_limit_metric": null,
+        "order_desc": true,
+        "contribution": false,
+        "row_limit": 10000,
+        "show_brush": true,
+        "show_legend": true,
+        "line_interpolation": "linear",
+        "x_axis_label": "Date",
+        "y_axis_label": "Number of Tickets",
+        "x_axis_format": "smart_date",
+        "y_axis_format": ",d",
+        "y_axis_bounds": [null, null],
+        "rolling_type": "None",
+        "comparison_type": "values",
+        "annotation_layers": []
+      }
+    },
+    {
+      "slice_id": 1002,
+      "slice_name": "Resolution Time by Category",
+      "form_data": {
+        "viz_type": "bar",
+        "datasource": "2__table",
+        "slice_id": 1002,
+        "url_params": {},
+        "granularity_sqla": null,
+        "time_grain_sqla": null,
+        "time_range": "Last week",
+        "metrics": [{"column": {"column_name": "avg_resolution_time_hrs"}, "aggregate": "AVG", "label": "Avg Resolution Time (hrs)"}],
+        "adhoc_filters": [],
+        "groupby": ["category"],
+        "timeseries_limit_metric": null,
+        "order_desc": true,
+        "contribution": false,
+        "row_limit": 10000,
+        "show_bar_value": true,
+        "x_axis_label": "Category",
+        "y_axis_label": "Average Resolution Time (hours)",
+        "x_axis_format": "%",
+        "y_axis_format": ".2f",
+        "y_axis_bounds": [0, null],
+        "rolling_type": "None",
+        "comparison_type": "values",
+        "annotation_layers": []
+      }
+    },
+    {
+      "slice_id": 1003,
+      "slice_name": "Closure Rate by Assigned Group",
+      "form_data": {
+        "viz_type": "pie",
+        "datasource": "3__table",
+        "slice_id": 1003,
+        "url_params": {},
+        "granularity_sqla": null,
+        "time_grain_sqla": null,
+        "time_range": "Last week",
+        "metric": {"column": {"column_name": "closure_rate"}, "aggregate": "AVG", "label": "Closure Rate"},
+        "adhoc_filters": [],
+        "groupby": ["assigned_group"],
+        "timeseries_limit_metric": null,
+        "order_desc": true,
+        "contribution": false,
+        "row_limit": 10000,
+        "pie_label_type": "key",
+        "donut": true,
+        "show_legend": true,
+        "show_labels": true,
+        "labels_outside": true,
+        "color_scheme": "supersetColors"
+      }
+    },
+    {
+      "slice_id": 1004,
+      "slice_name": "Ticket Backlog by Priority",
+      "form_data": {
+        "viz_type": "table",
+        "datasource": "4__table",
+        "slice_id": 1004,
+        "url_params": {},
+        "granularity_sqla": null,
+        "time_grain_sqla": null,
+        "time_range": "Last week",
+        "metrics": [
+          {"column": {"column_name": "open_ticket_count"}, "aggregate": "SUM", "label": "Open Tickets"},
+          {"column": {"column_name": "avg_age_days"}, "aggregate": "AVG", "label": "Avg Age (days)"}
+        ],
+        "adhoc_filters": [],
+        "groupby": ["priority"],
+        "timeseries_limit_metric": null,
+        "order_desc": true,
+        "row_limit": 10000,
+        "include_time": false,
+        "order_by_cols": [],
+        "table_timestamp_format": "%Y-%m-%d %H:%M:%S",
+        "page_length": 10,
+        "include_search": true,
+        "show_cell_bars": true
+      }
+    }
+  ],
+  "version": "1.0.0"
+}
